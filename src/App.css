@@ -1,38 +1,182 @@
+/* Default light mode */
+:root {
+  --background-color: white;
+  --text-color: #333;
+}
+
+/* Automatically detect dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #121212;
+    --text-color: white;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.light-mode {
+  background-color: white;
+  color: #333333; /* Text color for light mode */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.dark-mode {
+  background-color: #121212; /* Dark background */
+  color: #ffffff; /* Text color for dark mode */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  flex-wrap: wrap;
+  top: 0;
+  background-color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #888888;
+  padding: 20px;
+  a:hover {
+    color: #000000;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header.dark-mode {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  flex-wrap: wrap;
+  top: 0;
+  background-color: #1e1e1e; /* Dark header */
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #f0f0f0; /* Light text for header in dark mode */
+  padding: 20px;
+  a:hover {
+    color: #d60f0f;
+  }
+}
+
+.header-content-right {
+  a {
+    margin-inline-end: 1.5rem;
+  }
+
+  a:last-child {
+    margin-inline-end: 0rem;
+  }
+}
+
+.footer {
+  display: flex;
+  background-color: #222222;
+  font-family: "Inter", sans-serif;
+  color: #F7F7F7;
+  padding: 20px;
+  justify-content: left;
+  p {
+    margin: 0;
+  }
+}
+
+.link {
+  color: #888888;
+  text-decoration: none;
+}
+
+.dark-mode .link {
+  color: #bbbbbb; /* Lighter link color in dark mode */
+}
+
+.search {
+  padding: 1rem;
+}
+
+.result {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: left;
+  text-align: left;
+  padding: 1rem;
+  margin-top: 0.7rem;
 }
 
-.App-link {
-  color: #61dafb;
+/* .result {
+  margin-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.result h3 {
+  margin: 10px 0;
+} */
+
+.result ul {
+  text-align: left;
+  list-style-type: none; /* Remove default list styles */
+  padding-left: 1rem; /* Remove padding */
+}
+
+.result li {
+  margin: 5px 0; /* Add some space between items */
+}
+
+.result-title {
+  display: flex;
+  justify-content: left;
+  text-align: left;
+  font-weight: bold;
+}
+
+.button {
+  display: flex;
+  position: sticky;
+  flex-wrap: wrap;
+  top: 0;
+  padding: 1rem;
+  justify-content: right;
+}
+
+h2 {
+  text-align: left;
+  padding: 1rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Allow grid items to fill horizontally */
+  gap: 0.3rem; /* Space between grid items */
+  padding: 1rem;
+}
+
+.grid-item {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 4rem;
+  font-family: "Noto Sans JP", sans-serif;
+  max-width: 6rem; /* Limit width for grid item */
+}
+
+.grid-item.dark-mode {
+  background-color: #1e1e1e;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 4rem;
+  font-family: "Noto Sans JP", sans-serif;
+  max-width: 6rem; /* Limit width for grid item */
+  color: #f1f1f1;
 }
