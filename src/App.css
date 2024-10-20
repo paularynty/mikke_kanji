@@ -108,8 +108,8 @@ body {
   flex-direction: column;
   justify-content: left;
   text-align: left;
-  padding: 1rem;
-  margin-top: 0.7rem;
+  padding-left: 1rem;
+  /* margin-top: 0.7rem; */
 }
 
 /* .result {
@@ -147,8 +147,10 @@ body {
 }
 
 h2 {
+  font-family: "Mochiy Pop One", sans-serif;
   text-align: left;
   padding: 1rem;
+  margin: 0px auto;
 }
 
 .grid-container {
@@ -165,7 +167,7 @@ h2 {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   font-size: 4rem;
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Mochiy Pop One", sans-serif;
   max-width: 6rem; /* Limit width for grid item */
 }
 
@@ -176,7 +178,14 @@ h2 {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   font-size: 4rem;
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Mochiy Pop One", sans-serif;
   max-width: 6rem; /* Limit width for grid item */
   color: #f1f1f1;
+}
+
+.kanjiDetail {
+  text-align: left;
+  font-size: 4rem;
+  font-family: "Mochiy Pop One", sans-serif;
+  padding-left: 1rem;
 }
