@@ -12,7 +12,7 @@ const AllKanji = () => {
       const options = {
         method: "GET",
         headers: {
-          "x-rapidapi-key": "YOUR_API_KEY", // Replace with your actual API key
+          "x-rapidapi-key": "15ae912ac0mshafc017a046e3bb5p1e71e3jsn9cd9b768b7e9",
           "x-rapidapi-host": "kanjialive-api.p.rapidapi.com",
         },
       };

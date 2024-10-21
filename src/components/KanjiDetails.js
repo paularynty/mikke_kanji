@@ -59,7 +59,6 @@ function KanjiDetails() {
           <div className="result">{kanjiData.kanji.strokes.count}</div>
           {/* <h2>Animation</h2>
           <div className="result">{kanjiData.kanji.video.poster}</div> */}
-          {/* You can add more information here as per the API response */}
         </div>
       ) : (
         <div>No data available for this kanji.</div>
