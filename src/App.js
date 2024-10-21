@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useTheme } from "./LightDark"; // Import the useTheme hook
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import KanjiDetails from "./components/KanjiDetails";
+// import Home from "./Home"; // Your existing homepage
+// import KanjiList from "./KanjiList"; // The new page for listing all kanji
+import { useTheme } from "./components/LightDarkMode";
 import "./App.css";
 
 function App() {
@@ -80,6 +84,7 @@ function App() {
   }, [performSearch]); // Include performSearch in the dependencies
 
   return (
+    <Router>
     <div className={darkMode ? "App dark-mode" : "App light-mode"}>
       <header className={darkMode ? "header dark-mode" : "header"}>
         <div className="link">Welcome to my kanji app!</div>
@@ -92,51 +97,74 @@ function App() {
           </a>
         </div>
       </header>
-      <div className="search">
-        <input
-          type="text"
-          placeholder="Enter English word"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)} // Update state on input change
-        />
-        <button onClick={performSearch}>Search</button>{" "}
-        {/* Call search function on button click */}
-      </div>
-      {hasSearched && ( // Conditionally display search results after a search is performed
-        <>
-      <h2>Search results</h2>
-      <div className="result">
-        <div className="result-title">Kanji</div>
-        <div className="grid-container">
-            {kanjiResults.length > 0 ? (
-              kanjiResults.map((kanji, index) => (
-                <div className={darkMode ? "grid-item dark-mode" : "grid-item"} key={index}>{kanji}</div>
-              ))
-            ) : (
-              <div>No kanji found.</div>
-            )}
-          </div>
-      </div>
-      <div className="result">
-        <div className="result-title">Radical</div>
-        <div className="grid-container">
-            {radicalResults.length > 0 ? (
-              radicalResults.map((radical, index) => (
-                <div className={darkMode ? "grid-item dark-mode" : "grid-item"} key={index}>{radical}</div>
-              ))
-            ) : (
-              <div>No radicals found.</div>
-            )}
-          </div>
-      </div>
-      </>
-      )}
+      <Routes>
+          {/* Route for search page */}
+          <Route
+            path="/"
+            element={
+              <>
+                <div className="search">
+                  <input
+                    type="text"
+                    placeholder="Enter English word"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)} // Update state on input change
+                  />
+                  <button onClick={performSearch}>Search</button>{" "}
+                </div>
+                {hasSearched && (
+                  <>
+                    <h2>Search results</h2>
+                    <div className="result">
+                      <div className="result-title">Kanji</div>
+                      <div className="grid-container">
+                        {kanjiResults.length > 0 ? (
+                          kanjiResults.map((kanji, index) => (
+                            <div
+                              className={darkMode ? "grid-item dark-mode" : "grid-item"}
+                              key={index}
+                              onClick={() => window.location.href = `/kanji/${kanji}`} // Navigate to details page on click
+                            >
+                              {kanji}
+                            </div>
+                          ))
+                        ) : (
+                          <div>No kanji found.</div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="result">
+                      <div className="result-title">Radical</div>
+                      <div className="grid-container">
+                        {radicalResults.length > 0 ? (
+                          radicalResults.map((radical, index) => (
+                            <div
+                            className={darkMode ? "grid-item dark-mode" : "grid-item"}
+                            key={index}
+                            >
+                              {radical}
+                            </div>
+                          ))
+                        ) : (
+                          <div>No radicals found.</div>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                )}
+              </>
+            }
+          />
+            {/* Route for kanji detail page */}
+            <Route path="/kanji/:character" element={<KanjiDetails />} />
+        </Routes>
       <div className="button">
         <button onClick={toggleDarkMode}>
           {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
         </button>
       </div>
     </div>
+    </Router>
   );
 }
 
