@@ -1,0 +1,20 @@
+DONE:
+
+- basic UI
+- successful API fetch
+- list all kanji
+- search kanji by english translation
+
+TO DO:
+
+- use history api or save the results in a url
+ - especially ascending/descending sort in separate urls to ease going back/forward
+
+- user authentication
+- favorite logic
+
+EXTRA:
+
+- search kanji by kanji?
+- search kanji by hiragana?
+- pokedex-esque UI
