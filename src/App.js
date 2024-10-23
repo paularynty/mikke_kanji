@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 // import Home from "./Home"; // Your existing homepage
-import { useTheme } from "./components/LightDarkMode";
-import KanjiDetails from "./components/KanjiDetails";
-import KanjiSearch from "./components/KanjiSearch";
-import KanjiList from "./components/KanjiList";
+import { useTheme } from "./components/darkMode";
+import KanjiDetails from "./components/kanjiDetails";
+import KanjiSearch from "./components/kanjiSearch";
+import KanjiList from "./components/kanjiList";
+// // import Login from "./pages/Login";
+// import Register from "./pages/Register";
 import "./App.css";
 
 function App() {
@@ -25,14 +27,16 @@ function App() {
               All Kanji
             </Link>
             <Link className="link" to="/login">
-            Log In
+              Log In
             </Link>
             <Link className="link" to="/signup">
-            Sign Up
+              Sign Up
             </Link>
           </div>
         </header>
         <Routes>
+          {/* <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Register />} /> */}
           <Route path="/allkanji" element={<KanjiList />} />
           <Route path="/search" element={<KanjiSearch />} />
           <Route path="/kanji/:character" element={<KanjiDetails />} />

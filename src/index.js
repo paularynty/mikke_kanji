@@ -1,4 +1,4 @@
-import { ThemeProvider } from "./components/LightDarkMode";
+import { ThemeProvider } from "./components/darkMode";
 import ReactDOM from "react-dom/client";
 import React from "react";
 import App from "./App";

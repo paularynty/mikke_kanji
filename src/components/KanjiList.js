@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useTheme } from "./LightDarkMode";
-import KanjiSort from "./KanjiSort";
+import { useTheme } from "./darkMode";
+import KanjiSort from "./kanjiSort";
 
 const KanjiList = () => {
   const [sortType, setSortType] = useState("default");
@@ -41,6 +41,10 @@ const KanjiList = () => {
 
   if (error) {
     return <div>{error}</div>;
+  }
+
+  if (!Array.isArray(kanjiData)) {
+    return <div>No data available.</div>;
   }
 
   return (

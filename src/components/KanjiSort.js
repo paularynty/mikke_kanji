@@ -1,4 +1,4 @@
-import { useTheme } from "./LightDarkMode";
+import { useTheme } from "./darkMode";
 import { useMemo } from "react";
 
 const KanjiSort = ({ data, sortType }) => {
