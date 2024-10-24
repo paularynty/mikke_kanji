@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useTheme } from "./DarkMode";
+import { useTheme } from "../utils/DarkMode";
 
 const KanjiSearch = () => {
   const [searchTerm, setSearchTerm] = useState(""); // State for the search term
@@ -21,7 +21,7 @@ const KanjiSearch = () => {
     setHasSearched(true); // Set the search flag to true after initiating a search
     setLoading(true); // Set loading to true before fetching data
 
-    const url = `http://localhost:5001/search/${encodeURIComponent(word)}`;
+    const url = `http://localhost:5001/kanji/search?word=${encodeURIComponent(word)}`;
 
     try {
       const response = await fetch(url);

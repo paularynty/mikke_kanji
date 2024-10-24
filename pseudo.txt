@@ -6,6 +6,7 @@
 - list all kanji
 - search kanji by english translation
 - sort kanji by stroke order (asc/desc)
+- favicon changed
 
 /backend
 - successful backend server set up
@@ -16,8 +17,15 @@
 ///TO DO
 
 /frontend
+- profile icon
+- login page frontend
+- register page frontend
+- profile page
+- home page
 
 /backend
+- login
+- register
 - user authentication
 - favorite logic
 
@@ -28,3 +36,10 @@
 - pokedex-esque UI
 - use history api or save the results in a url
 - especially ascending/descending sort in separate urls to ease going back/forward
+
+
+backend:
+- I fetch the api data in kanjiController, and use app.get in index.js
+- for the user authentication, I use express router
+- for password hashing and salting, I use bcrypt and jwt (json web token)
+- for extra security, database queries are structured like: $1, variable;

@@ -75,3 +75,23 @@
 // };
 
 // export default Login;
+
+import LoginForm from "../components/LoginForm.js"
+import React from "react";
+// import SignupForm from "../components/SignupForm.js"
+
+const LoginPage = () => {
+
+	return (
+	<div className="h-screen bg-cover bg-center">
+		<div className="flex flex-col justify-center items-center h-full">
+			<div className="opacity-60 w-full max-w-md m-auto bg-gray-400 rounded p-5 overflow-auto">
+				<LoginForm />
+				{/* <SignupForm  /> */}
+			</div>
+		</div>
+	</div>
+	)
+}
+
+export default LoginPage;

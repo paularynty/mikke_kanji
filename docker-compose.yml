@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:latest
+    container_name: kanjiapp
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass123
+      POSTGRES_DB: kanjidb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - kanji_network
+
+volumes:
+  pgdata:
+
+networks:
+  kanji_network:
+    driver: bridge

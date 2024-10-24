@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+pseudo.txt
+
+# don't really need these anymore but keeping them around just in case
+src/pages/.UserProfile.js
+src/components/.KanjiSort.js

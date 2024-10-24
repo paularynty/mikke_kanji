@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useTheme } from "./DarkMode";
+import { useTheme } from "../utils/DarkMode";
 
 const KanjiList = () => {
   const [kanjiResults, setKanjiResults] = useState([]);
-  const [sortType, setSortType] = useState("default");  // Start with "default" sort
+  const [sortType, setSortType] = useState("default");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { darkMode } = useTheme();
 
-  // Fetch non-sorted Kanji data initially
+  // by default, we fetch non-sorted kanji data
   useEffect(() => {
     const fetchNonSortedKanji = async () => {
       try {
@@ -16,7 +16,7 @@ const KanjiList = () => {
         const resultData = await response.json();
         setKanjiResults(resultData);
       } catch (error) {
-        setError("Failed to fetch Kanji data.");
+        setError("Failed to fetch kanji data.");
       } finally {
         setLoading(false);
       }
@@ -25,11 +25,11 @@ const KanjiList = () => {
     fetchNonSortedKanji();
   }, []);
 
-  // Fetch sorted Kanji data when the sortType changes
+  // when sortType changes, trigger sorting request and fetch sorted kanji data
+  // if/when sorting changes, re-run useEffect
   useEffect(() => {
     const fetchSortedKanji = async () => {
-      if (sortType === "default") return;  // Don't fetch anything if it's still the default
-      
+      if (sortType === "default") return;
       try {
         const response = await fetch(
           `http://localhost:5001/kanji/sorted?sortType=${sortType}`
@@ -37,12 +37,12 @@ const KanjiList = () => {
         const resultData = await response.json();
         setKanjiResults(resultData);
       } catch (error) {
-        setError("Failed to fetch sorted Kanji data.");
+        setError("Failed to fetch sorted kanji data.");
       }
     };
 
-    fetchSortedKanji();  // Trigger sorting request when sortType changes
-  }, [sortType]);  // Depend on sortType so it re-runs when sorting changes
+    fetchSortedKanji();
+  }, [sortType]);
 
   if (loading) {
     return <div>Loading...</div>;

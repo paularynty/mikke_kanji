@@ -1,16 +1,18 @@
 /* Default light mode */
-/* :root {
+:root {
   --background-color: white;
   --text-color: #333;
-} */
+}
 
 /* Automatically detect dark mode */
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --background-color: #121212;
     --text-color: white;
   }
-} */
+}
+
+
 
 html, body {
   margin: 0;

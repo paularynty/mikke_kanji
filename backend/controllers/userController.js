@@ -1,6 +1,3 @@
-// const bcrypt = require('bcryptjs');
-// const pool = require('../models/db');
-
 // // Handle user registration
 // const registerUser = async (req, res) => {
 //   const { username, password } = req.body;
@@ -42,17 +39,31 @@
 // bcryptjs: A library for hashing passwords securely.
 // jsonwebtoken: A library for creating and verifying JSON Web Tokens (JWTs).
 // pool: A connection pool to the PostgreSQL database, imported from a local database configuration file.
-const express = require("express");
-const { Pool } = require("pg");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { pool } = require("../database");
-
+const { pool } = require("../database/db");
 const JWT_SECRET = "real-secure-key";
+const jwt = require("jsonwebtoken");
+const express = require("express");
+const bcrypt = require("bcryptjs");
+// const { Pool } = require("pg");
+const userRouter = express.Router(); // Correctly define the Router
 
-app.use(express.json());
+// app.use(express.json());
 
-app.post("/register", async (req, res) => {
+const authMiddleware = (req, res, next) => {
+  const token = req.get("Authorization"); // Use "Authorization" to fetch the header
+  if (!token) return res.status(401).json({ error: "Access denied: No token provided" });
+
+  try {
+    const cleanedToken = token.replace("Bearer ", ""); // Clean the token
+    const authorized = jwt.verify(cleanedToken, JWT_SECRET);
+    req.user = authorized; // Attach user data to request object
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+};
+
+userRouter.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   try {
     const count_result = await pool.query(
@@ -74,8 +85,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// Similarly, you can define your other routes
-app.post("/login", async (req, res) => {
+userRouter.post("/login", async (req, res) => {
   const { username, password } = req.body;
   try {
     const result = await pool.query(
@@ -100,7 +110,20 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Starting the server
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+userRouter.post("/validate", authMiddleware, async (req, res) => {
+  res.status(200).json({ msg: "Token validated" });
 });
+
+const testConnection = async () => {
+  console.log("Attempting to connect to database...");
+  try {
+    const res = await pool.query("SELECT NOW()");
+    console.log("Successfully connected to database:", res.rows[0]);
+  } catch (error) {
+    console.error("Database connection error:", error);
+  }
+};
+
+testConnection();
+
+module.exports = { userRouter, authMiddleware };

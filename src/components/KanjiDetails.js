@@ -9,7 +9,7 @@ function KanjiDetails() {
 
   useEffect(() => {
     const fetchKanjiData = async () => {
-      const url = `http://localhost:5001/kanji/${encodeURIComponent(
+      const url = `http://localhost:5001/kanji/details/${encodeURIComponent(
         character
       )}`;
 
