@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useTheme } from "./DarkMode";
+import { useTheme } from "../utils/darkMode";
 
 const KanjiSearch = () => {
   const [searchTerm, setSearchTerm] = useState(""); // State for the search term

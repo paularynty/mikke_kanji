@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 // import Home from "./Home"; // Your existing homepage
-import { useTheme } from "./components/DarkMode";
+import { useTheme } from "./utils/darkMode";
 import KanjiDetails from "./components/KanjiDetails";
 import KanjiSearch from "./components/KanjiSearch";
 import KanjiList from "./components/KanjiList";
@@ -15,7 +15,7 @@ function App() {
     <Router>
       <div className={darkMode ? "App dark-mode" : "App light-mode"}>
         <header className={darkMode ? "header dark-mode" : "header"}>
-          <div className="link">KanjiDex</div>
+          <div className="link">Mikke!</div>
           <div className="header-content-right">
             <Link className="link" to="/home">
               Home
@@ -26,17 +26,9 @@ function App() {
             <Link className="link" to="/kanji">
               All Kanji
             </Link>
-            <Link className="link" to="/login">
-              Log In
-            </Link>
-            <Link className="link" to="/signup">
-              Sign Up
-            </Link>
           </div>
         </header>
         <Routes>
-          {/* <Route path="/login" element={<Login />} />
-          <Route path="/login" element={<Register />} /> */}
           <Route path="/kanji" element={<KanjiList />} />
           <Route path="/search" element={<KanjiSearch />} />
           <Route path="/kanji/:character" element={<KanjiDetails />} />

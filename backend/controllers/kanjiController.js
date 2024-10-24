@@ -22,11 +22,10 @@ const fetchKanjiData = async () => {
     return kanjiData.map((item) => ({
       kanji: {
         character: item.kanji.character,
-        strokes: item.kanji.strokes ? item.kanji.strokes.count : null,  // Ensure strokes.count is fetched
-        //   meaning: item.kanji.meaning,
-        //   strokes: item.kanji.strokes,
-        //   onyomi: item.kanji.onyomi,
-        //   kunyomi: item.kanji.kunyomi
+        strokes: item.kanji.strokes ? item.kanji.strokes.count : null, // Ensure strokes.count is fetched
+        meaning: item.kanji.meaning,
+        onyomi: item.kanji.onyomi,
+        kunyomi: item.kanji.kunyomi,
       },
     }));
   } catch (error) {

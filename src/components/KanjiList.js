@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useTheme } from "./DarkMode";
+import { useTheme } from "../utils/darkMode";
 
 const KanjiList = () => {
   const [kanjiResults, setKanjiResults] = useState([]);
