@@ -1,35 +1,58 @@
-const userRoutes = require('./routes/users');
-const express = require('express');
-const axios = require('axios');
-const cors = require('cors');
+const cors = require("cors");
+const express = require("express");
+const {
+  fetchKanjiData,
+  fetchKanjiSearchResults,
+  fetchKanjiDetails,
+} = require("./controllers/kanjiController");
+
 const app = express();
 const port = 5001;
 
-// const apiURL = "https://kanjialive-api.p.rapidapi.com/api/public/";
-
-// Middleware to parse incoming JSON requests
-// For enabling CORS (Cross-Origin Resource Sharing)
-app.use(express.json());
+// Middleware that enables CORS (Cross-Origin Resource Sharing) and JSON parsing
 app.use(cors());
+app.use(express.json());
 
-//Routes go here
-app.use('/api/users', userRoutes);
+// Route for getting all kanji
+app.get("/kanji", async (req, res) => {
+  try {
+    const kanjiData = await fetchKanjiData();
+    if (!kanjiData || kanjiData.length === 0) {
+      return res.status(404).json({ message: "No Kanji found." });
+    }
+    res.json(kanjiData);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch Kanji data." });
+  }
+});
+
+// Route for getting sorted kanji
+app.get("/kanji/sorted", async (req, res) => {
+  try {
+    const sortType = req.query.sortType; 
+    const kanjiData = await fetchKanjiData();
+
+    // console.log("Fetched Kanji Data:", kanjiData);
+
+    if (!kanjiData || kanjiData.length === 0) {
+      return res.status(404).json({ message: "No Kanji found." });
+    }
+
+    if (sortType === "ascending") {
+      kanjiData.sort((a, b) => a.kanji.strokes - b.kanji.strokes);
+    } else if (sortType === "descending") {
+      kanjiData.sort((a, b) => b.kanji.strokes - a.kanji.strokes);
+    }
+
+    // console.log("Sorted Kanji Data:", kanjiData);
+
+    res.json(kanjiData);
+  } catch (error) {
+    console.error("Error fetching or sorting Kanji data:", error);
+    res.status(500).send("Error fetching or sorting Kanji data.");
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
-});
-
-app.get('/', async (req, res) => {
-  try {
-    const response = await axios.get(`https://kanjialive-api.p.rapidapi.com/api/public/kanji/all/`, {
-      headers: {
-        "x-rapidapi-key": "15ae912ac0mshafc017a046e3bb5p1e71e3jsn9cd9b768b7e9", // Make sure your API key is valid
-        "x-rapidapi-host": "kanjialive-api.p.rapidapi.com"
-      }
-    });
-    res.json(response.data);
-  } catch (error) {
-    console.error('Error fetching data from external API:', error); // Log the error
-    res.status(500).json({ error: 'Failed to fetch data' });
-  }
 });

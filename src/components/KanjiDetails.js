@@ -9,40 +9,35 @@ function KanjiDetails() {
 
   useEffect(() => {
     const fetchKanjiData = async () => {
-      const url = `https://kanjialive-api.p.rapidapi.com/api/public/kanji/${encodeURIComponent(character)}`;
-      const options = {
-        method: "GET",
-        headers: {
-          "x-rapidapi-key": "15ae912ac0mshafc017a046e3bb5p1e71e3jsn9cd9b768b7e9",
-          "x-rapidapi-host": "kanjialive-api.p.rapidapi.com",
-        },
-      };
+      const url = `http://localhost:5001/kanji/${encodeURIComponent(
+        character
+      )}`;
 
       try {
-        const response = await fetch(url, options);
+        const response = await fetch(url);
         const data = await response.json();
-        setKanjiData(data); // Set the kanji data
-        setLoading(false); // Disable loading
+        setKanjiData(data);
+        setLoading(false);
       } catch (error) {
         console.error(error);
         setError("Failed to fetch kanji data.");
-        setLoading(false); // Disable loading in case of error
+        setLoading(false);
       }
     };
 
     fetchKanjiData();
-  }, [character]); // Re-fetch if character changes
+  }, [character]);
 
   if (loading) {
-    return <div>Loading...</div>; // Display loading state
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>; // Display error if there's an issue
+    return <div>{error}</div>;
   }
 
   return (
-    <div>
+    <div className="result">
       {kanjiData ? (
         <div>
           <div className="kanjiDetail">{kanjiData.kanji.character}</div>
@@ -57,8 +52,6 @@ function KanjiDetails() {
           <div className="result">{kanjiData.kanji.kunyomi.romaji}</div>
           <h2>Strokes</h2>
           <div className="result">{kanjiData.kanji.strokes.count}</div>
-          {/* <h2>Animation</h2>
-          <div className="result">{kanjiData.kanji.video.poster}</div> */}
         </div>
       ) : (
         <div>No data available for this kanji.</div>

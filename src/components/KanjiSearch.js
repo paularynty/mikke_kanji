@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useTheme } from "./darkMode";
+import { useTheme } from "./DarkMode";
 
 const KanjiSearch = () => {
   const [searchTerm, setSearchTerm] = useState(""); // State for the search term
   const [kanjiResults, setKanjiResults] = useState([]); // State for kanji results
-  const [radicalResults, setRadicalResults] = useState([]); // State for radical results
+  // const [radicalResults, setRadicalResults] = useState([]); // State for radical results
   const [hasSearched, setHasSearched] = useState(false); // State to track if a search has been performed
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const { darkMode } = useTheme();
 
   // Memoized function to handle search logic
@@ -17,46 +19,40 @@ const KanjiSearch = () => {
     }
 
     setHasSearched(true); // Set the search flag to true after initiating a search
+    setLoading(true); // Set loading to true before fetching data
 
-    const url = `https://kanjialive-api.p.rapidapi.com/api/public/search/${encodeURIComponent(
-      word
-    )}`;
-    const options = {
-      method: "GET",
-      headers: {
-        "x-rapidapi-key": "15ae912ac0mshafc017a046e3bb5p1e71e3jsn9cd9b768b7e9",
-        "x-rapidapi-host": "kanjialive-api.p.rapidapi.com",
-      },
-    };
+    const url = `http://localhost:5001/search/${encodeURIComponent(word)}`;
 
     try {
-      const response = await fetch(url, options);
+      const response = await fetch(url);
       const resultData = await response.json();
 
       if (Array.isArray(resultData) && resultData.length > 0) {
         const kanjiArray = [];
-        const radicalArray = [];
+        // const radicalArray = [];
 
         resultData.forEach((kanjiData) => {
           if (kanjiData.kanji && kanjiData.kanji.character) {
             kanjiArray.push(kanjiData.kanji.character); // Add kanji to the array
           }
 
-          if (kanjiData.radical && kanjiData.radical.character) {
-            radicalArray.push(kanjiData.radical.character); // Add radical to the array
-          }
+          // if (kanjiData.radical && kanjiData.radical.character) {
+          //   radicalArray.push(kanjiData.radical.character); // Add radical to the array
+          // }
         });
 
         setKanjiResults(kanjiArray); // Update the kanji results state
-        setRadicalResults(radicalArray); // Update the radical results state
+        // setRadicalResults(radicalArray); // Update the radical results state
       } else {
         setKanjiResults([]); // Clear results if no data found
-        setRadicalResults([]);
+        // setRadicalResults([]);
       }
     } catch (error) {
-      console.error(error);
+      setError("Failed to fetch Kanji data.");
       setKanjiResults([]); // Clear results on error
-      setRadicalResults([]);
+      // setRadicalResults([]);
+    } finally {
+      setLoading(false);
     }
   }, [searchTerm]); // Depend on searchTerm to ensure it uses the latest value
 
@@ -76,6 +72,14 @@ const KanjiSearch = () => {
     };
   }, [performSearch]); // Include performSearch in the dependencies
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <>
       <div className="search">
@@ -91,12 +95,16 @@ const KanjiSearch = () => {
         <>
           <h2>Search results</h2>
           <div className="result">
-            <div className="result-title">Kanji</div>
+            {/* <div className="result-title">Kanji</div> */}
             <div className="grid-container">
               {kanjiResults.length > 0 ? (
                 kanjiResults.map((kanji, index) => (
                   <div
-                    className={darkMode ? "grid-item-clickable dark-mode" : "grid-item-clickable"}
+                    className={
+                      darkMode
+                        ? "grid-item-clickable dark-mode"
+                        : "grid-item-clickable"
+                    }
                     key={index}
                     onClick={() => (window.location.href = `/kanji/${kanji}`)} // Navigate to details page on click
                   >
@@ -108,7 +116,7 @@ const KanjiSearch = () => {
               )}
             </div>
           </div>
-          <div className="result">
+          {/* <div className="result">
             <div className="result-title">Radical</div>
             <div className="grid-container">
               {radicalResults.length > 0 ? (
@@ -124,7 +132,7 @@ const KanjiSearch = () => {
                 <div>No radicals found.</div>
               )}
             </div>
-          </div>
+          </div> */}
         </>
       )}
     </>

@@ -147,7 +147,7 @@ h2 {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 0.3rem;
+  gap: 1rem;
   padding: 1rem;
 }
 
@@ -159,18 +159,11 @@ h2 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   font-size: 4rem;
   font-family: "Mochiy Pop One", sans-serif;
-  max-width: 6rem; 
+  max-width: 6rem;
 }
 
 .grid-item.dark-mode {
   background-color: #1e1e1e;
-  padding: 10px;
-  text-align: center;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  font-size: 4rem;
-  font-family: "Mochiy Pop One", sans-serif;
-  max-width: 6rem;
   color: #f1f1f1;
 }
 
@@ -188,15 +181,7 @@ h2 {
 
 .grid-item-clickable.dark-mode {
   background-color: #1e1e1e;
-  padding: 10px;
-  text-align: center;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  font-size: 4rem;
-  font-family: "Mochiy Pop One", sans-serif;
-  max-width: 6rem;
   color: #f1f1f1;
-  cursor: pointer;
 }
 
 .kanjiDetail {
