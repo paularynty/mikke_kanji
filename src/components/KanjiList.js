@@ -1,30 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useTheme } from "./darkMode";
-import KanjiSort from "./kanjiSort";
+import React, { useEffect, useState } from "react";
+import { useTheme } from "./DarkMode";
 
 const KanjiList = () => {
-  const [sortType, setSortType] = useState("default");
-  const [kanjiData, setKanjiData] = useState([]);
+  const [kanjiResults, setKanjiResults] = useState([]);
+  const [sortType, setSortType] = useState("default");  // Start with "default" sort
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { darkMode } = useTheme();
 
+  // Fetch non-sorted Kanji data initially
   useEffect(() => {
-    const fetchKanji = async () => {
-      const url = "https://kanjialive-api.p.rapidapi.com/api/public/kanji/all";
-      const options = {
-        method: "GET",
-        headers: {
-          "x-rapidapi-key":
-            "15ae912ac0mshafc017a046e3bb5p1e71e3jsn9cd9b768b7e9",
-          "x-rapidapi-host": "kanjialive-api.p.rapidapi.com",
-        },
-      };
-
+    const fetchNonSortedKanji = async () => {
       try {
-        const response = await fetch(url, options);
+        const response = await fetch("http://localhost:5001/kanji");
         const resultData = await response.json();
-        setKanjiData(resultData);
+        setKanjiResults(resultData);
       } catch (error) {
         setError("Failed to fetch Kanji data.");
       } finally {
@@ -32,8 +22,27 @@ const KanjiList = () => {
       }
     };
 
-    fetchKanji();
+    fetchNonSortedKanji();
   }, []);
+
+  // Fetch sorted Kanji data when the sortType changes
+  useEffect(() => {
+    const fetchSortedKanji = async () => {
+      if (sortType === "default") return;  // Don't fetch anything if it's still the default
+      
+      try {
+        const response = await fetch(
+          `http://localhost:5001/kanji/sorted?sortType=${sortType}`
+        );
+        const resultData = await response.json();
+        setKanjiResults(resultData);
+      } catch (error) {
+        setError("Failed to fetch sorted Kanji data.");
+      }
+    };
+
+    fetchSortedKanji();  // Trigger sorting request when sortType changes
+  }, [sortType]);  // Depend on sortType so it re-runs when sorting changes
 
   if (loading) {
     return <div>Loading...</div>;
@@ -43,7 +52,7 @@ const KanjiList = () => {
     return <div>{error}</div>;
   }
 
-  if (!Array.isArray(kanjiData)) {
+  if (!Array.isArray(kanjiResults) || kanjiResults.length === 0) {
     return <div>No data available.</div>;
   }
 
@@ -61,19 +70,24 @@ const KanjiList = () => {
           <option value="descending">Descending (Stroke count)</option>
         </select>
       </div>
-      <KanjiSort data={kanjiData} sortType={sortType} />
       <div className="grid-container">
-        {kanjiData.map((kanji, index) => (
-          <div
-            className={
-              darkMode ? "grid-item-clickable dark-mode" : "grid-item-clickable"
-            }
-            key={index}
-            onClick={() => (window.location.href = `/kanji/${kanji.ka_utf}`)}
-          >
-            {kanji.ka_utf}
-          </div>
-        ))}
+        {kanjiResults.map((kanji, index) =>
+          kanji.kanji.character ? (
+            <div
+              className={
+                darkMode
+                  ? "grid-item-clickable dark-mode"
+                  : "grid-item-clickable"
+              }
+              key={index}
+              onClick={() =>
+                (window.location.href = `/kanji/${kanji.kanji.character}`)
+              }
+            >
+              {kanji.kanji.character}
+            </div>
+          ) : null
+        )}
       </div>
     </div>
   );
