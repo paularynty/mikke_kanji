@@ -41,15 +41,16 @@ html, body {
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: sticky;
   flex-wrap: wrap;
   top: 0;
   background-color: white;
-  font-family: "Inter", sans-serif;
-  font-size: 14px;
+  font-family: "Mochiy Pop One", sans-serif;
+  font-size: 18px;
   font-weight: 500;
   color: #888888;
-  padding: 20px;
+  padding: 16px;
   a:hover {
     color: #000000;
   }
@@ -58,9 +59,14 @@ html, body {
 .header.dark-mode {
   background-color: #1e1e1e;
   color: #f0f0f0;
+  a:hover {
+    color: #cce3c5;
+  }
 }
 
 .header-content-right {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
   a {
     margin-inline-end: 1.5rem;
   }
@@ -95,6 +101,11 @@ html, body {
   padding: 1rem;
 }
 
+.loading {
+  font-family: "Mochiy Pop One", sans-serif;
+  align-items: center;
+}
+
 .result {
   display: flex;
   flex-direction: column;
@@ -123,18 +134,24 @@ html, body {
 .button {
   position: fixed;
   z-index: 1000;
-  bottom: 0;
-  right: 0;
-  padding: 1rem;
+  bottom: 1rem;
+  right: 1rem;
   justify-content: right;
 }
 
 .button-sort {
   position: fixed;
   z-index: 1000;
-  top: 3rem;
+  top: 4.5rem;
   right: 1rem;
   justify-content: right;
+}
+
+h2 {
+  font-family: "Mochiy Pop One", sans-serif;
+  text-align: center;
+  padding: 1rem;
+  margin: 0px auto;
 }
 
 h2 {
@@ -145,6 +162,7 @@ h2 {
 }
 
 .grid-container {
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 1rem;
@@ -177,11 +195,16 @@ h2 {
   font-family: "Mochiy Pop One", sans-serif;
   max-width: 6rem;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
 .grid-item-clickable.dark-mode {
   background-color: #1e1e1e;
   color: #f1f1f1;
+}
+
+.grid-item-clickable.dark-mode:hover {
+  color: #cce3c5;
 }
 
 .kanjiDetail {

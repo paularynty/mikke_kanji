@@ -2,10 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useTheme } from "../utils/darkMode";
 
 const KanjiSearch = () => {
-  const [searchTerm, setSearchTerm] = useState(""); // State for the search term
-  const [kanjiResults, setKanjiResults] = useState([]); // State for kanji results
-  // const [radicalResults, setRadicalResults] = useState([]); // State for radical results
   const [hasSearched, setHasSearched] = useState(false); // State to track if a search has been performed
+  const [kanjiResults, setKanjiResults] = useState([]); // State for kanji results
+  const [searchTerm, setSearchTerm] = useState(""); // State for the search term
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { darkMode } = useTheme();
@@ -21,7 +20,7 @@ const KanjiSearch = () => {
     setHasSearched(true); // Set the search flag to true after initiating a search
     setLoading(true); // Set loading to true before fetching data
 
-    const url = `http://localhost:5001/search/${encodeURIComponent(word)}`;
+    const url = `http://localhost:5001/kanji/search?word=${encodeURIComponent(word)}`;
 
     try {
       const response = await fetch(url);
@@ -29,28 +28,20 @@ const KanjiSearch = () => {
 
       if (Array.isArray(resultData) && resultData.length > 0) {
         const kanjiArray = [];
-        // const radicalArray = [];
 
         resultData.forEach((kanjiData) => {
           if (kanjiData.kanji && kanjiData.kanji.character) {
             kanjiArray.push(kanjiData.kanji.character); // Add kanji to the array
           }
-
-          // if (kanjiData.radical && kanjiData.radical.character) {
-          //   radicalArray.push(kanjiData.radical.character); // Add radical to the array
-          // }
         });
 
         setKanjiResults(kanjiArray); // Update the kanji results state
-        // setRadicalResults(radicalArray); // Update the radical results state
       } else {
-        setKanjiResults([]); // Clear results if no data found
-        // setRadicalResults([]);
+        setKanjiResults([]); // If no data found, clear results
       }
     } catch (error) {
       setError("Failed to fetch Kanji data.");
-      setKanjiResults([]); // Clear results on error
-      // setRadicalResults([]);
+      setKanjiResults([]); // If an error is encountered, also clear results
     } finally {
       setLoading(false);
     }
@@ -95,7 +86,6 @@ const KanjiSearch = () => {
         <>
           <h2>Search results</h2>
           <div className="result">
-            {/* <div className="result-title">Kanji</div> */}
             <div className="grid-container">
               {kanjiResults.length > 0 ? (
                 kanjiResults.map((kanji, index) => (
@@ -116,23 +106,6 @@ const KanjiSearch = () => {
               )}
             </div>
           </div>
-          {/* <div className="result">
-            <div className="result-title">Radical</div>
-            <div className="grid-container">
-              {radicalResults.length > 0 ? (
-                radicalResults.map((radical, index) => (
-                  <div
-                    className={darkMode ? "grid-item dark-mode" : "grid-item"}
-                    key={index}
-                  >
-                    {radical}
-                  </div>
-                ))
-              ) : (
-                <div>No radicals found.</div>
-              )}
-            </div>
-          </div> */}
         </>
       )}
     </>
