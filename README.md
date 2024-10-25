@@ -14,8 +14,11 @@ Project has been built with React and JavaScript. Backend is currently being bui
 
 ## Installation
 
-1. Clone the repository
-2. Navigate to the directory with `cd kanjiapp`
-3. Launch app with `npm start`
+1. Clone repository
+2. Go to directory with `cd mikke_kanji`
+3. `cd backend && npm install`
+4. `node index.js` to start the backend server
+4. `cd ../frontend && npm install`
+5. `npm start` to launch the frontend
    - (If `npm start` does not work, ensure you have React installed on your computer.)
-4. If not opened automatically, open [http://localhost:3000](http://localhost:3000) in your chosen browser to display the app.
+6. If not opened automatically, open [http://localhost:3000](http://localhost:3000) in your chosen browser to display the app.

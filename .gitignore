@@ -30,3 +30,4 @@ src/pages/.UserProfile.js
 src/pages/.Login.js
 src/pages/.Register.js
 backend/controllers/.userController.js
+/backend/node_modules/
