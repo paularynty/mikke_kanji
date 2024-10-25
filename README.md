@@ -10,7 +10,7 @@ The app displays a full list of kanji from the external API kindly provided by [
 
 Individual kanji search by English word is also available. By clicking on any kanji in the search result or list, you may view information about said kanji such as all possible meanings, onyomi/kunyomi (Chinese/Japanese) readings, and stroke count.
 
-Project has been built with React and JavaScript. Backend is currently being built using Node.js, and PostgreSQL and Docker for the database.
+Project has been built with React and JavaScript. Backend has been built using Node.js, and PostgreSQL and Docker will be used to build the database later.
 
 ## Installation
 
