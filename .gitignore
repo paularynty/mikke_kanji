@@ -25,6 +25,7 @@ yarn-error.log*
 # no longer need these but keeping them around just in case
 src/components/.KanjiSort.js
 src/pages/.UserProfile.js
+.pseudo.txt
 
 # hiding the user auth logic until it works again
 src/pages/.Login.js

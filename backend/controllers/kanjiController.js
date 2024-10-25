@@ -1,6 +1,5 @@
 const express = require("express");
 const axios = require("axios");
-const app = express();
 
 const fetchKanjiData = async () => {
   try {
@@ -20,7 +19,6 @@ const fetchKanjiData = async () => {
       kanji: {
         character: item.kanji.character,
         strokes: item.kanji.strokes ? item.kanji.strokes.count : null,
-        meaning: item.kanji.meaning,
         onyomi: item.kanji.onyomi,
         kunyomi: item.kanji.kunyomi,
         meaning: item.kanji.meaning.english,

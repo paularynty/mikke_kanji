@@ -1,16 +1,16 @@
 /* Default light mode */
-/* :root {
+:root {
   --background-color: white;
   --text-color: #333;
-} */
+}
 
 /* Automatically detect dark mode */
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --background-color: #121212;
     --text-color: white;
   }
-} */
+}
 
 html, body {
   margin: 0;
@@ -29,13 +29,13 @@ html, body {
 }
 
 .App.light-mode {
-  background-color: white;
-  color: #333333;
+  background-color: #f0e9d8;
+  color: #12101e;
 }
 
 .App.dark-mode {
-  background-color: #121212;
-  color: #ffffff;
+  background-color: #12101e;
+  color: #fffaef;
 }
 
 .header {
@@ -45,11 +45,11 @@ html, body {
   position: sticky;
   flex-wrap: wrap;
   top: 0;
-  background-color: white;
+  background-color: #fffaef;
   font-family: "Mochiy Pop One", sans-serif;
   font-size: 18px;
   font-weight: 500;
-  color: #888888;
+  color: #15152c;
   padding: 16px;
   a:hover {
     color: #000000;
@@ -57,10 +57,10 @@ html, body {
 }
 
 .header.dark-mode {
-  background-color: #1e1e1e;
-  color: #f0f0f0;
+  background-color: #15152c;
+  color: #fffaef;
   a:hover {
-    color: #cce3c5;
+    color: #c6e6bd;
   }
 }
 
@@ -78,23 +78,42 @@ html, body {
 
 .footer {
   display: flex;
-  background-color: #222222;
+  margin-top: auto;
+  align-items: center;
+  flex-wrap: wrap;
+  top: 0;
+  background-color: #fffaef;
   font-family: "Inter", sans-serif;
-  color: #F7F7F7;
-  padding: 20px;
-  justify-content: left;
-  p {
-    margin: 0;
+  font-size: 12px;
+  color: #15152c;
+  padding: 16px;
+  a {
+    color: #15152c;
+  }
+}
+
+.footer span {
+  margin: 0 0.5rem; /* Add space on the left and right of each span */
+}
+
+.footer.dark-mode {
+  background-color: #15152c;
+  color: #f0e9d8;
+  a {
+    color: #f0e9d8;
+  }
+  a:hover {
+    color: #c6e6bd;
   }
 }
 
 .link {
-  color: #888888;
+  color: #15152c;
   text-decoration: none;
 }
 
 .dark-mode .link {
-  color: #bbbbbb;
+  color: #fffaef;
 }
 
 .search {
@@ -106,10 +125,25 @@ html, body {
   align-items: center;
 }
 
-.result {
+.card {
+  background-color: #fffaef;
   display: flex;
+  margin: 1.5rem;
+  width: 30%;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  align-self: center;
+  padding: 1rem;
+}
+
+.card.dark-mode {
+  background-color: #15152c;
+  color: #fffaef;
+}
+
+.result {
   flex-direction: column;
-  justify-content: left;
+  max-width: 80%;
   text-align: left;
   padding-left: 1rem;
 }
@@ -149,66 +183,44 @@ html, body {
 
 h2 {
   font-family: "Mochiy Pop One", sans-serif;
-  text-align: center;
-  padding: 1rem;
-  margin: 0px auto;
-}
-
-h2 {
-  font-family: "Mochiy Pop One", sans-serif;
   text-align: left;
-  padding: 1rem;
+  padding: 0.8rem;
   margin: 0px auto;
 }
 
 .grid-container {
   margin-top: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
   gap: 1rem;
   padding: 1rem;
 }
 
 .grid-item {
-  background-color: #f1f1f1;
-  padding: 10px;
-  text-align: center;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  font-size: 4rem;
-  font-family: "Mochiy Pop One", sans-serif;
-  max-width: 6rem;
-}
-
-.grid-item.dark-mode {
-  background-color: #1e1e1e;
-  color: #f1f1f1;
-}
-
-.grid-item-clickable {
-  background-color: #f1f1f1;
+  background-color: #fffaef;
+  color: #15152c;
   padding: 0.6rem;
   text-align: center;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  font-size: 4rem;
+  font-size: 6rem;
   font-family: "Mochiy Pop One", sans-serif;
-  max-width: 6rem;
+  max-width: 8rem;
   cursor: pointer;
 }
 
-.grid-item-clickable.meaning {
+.grid-item.meaning {
   font-family: "Inter", sans-serif;
   font-size: 8px;
 }
 
-.grid-item-clickable.dark-mode {
-  background-color: #1e1e1e;
-  color: #f1f1f1;
+.grid-item.dark-mode {
+  background-color: #15152c;
+  color: #fffaef;
 }
 
-.grid-item-clickable.dark-mode:hover {
-  color: #cce3c5;
+.grid-item.dark-mode:hover {
+  color: #c6e6bd;
 }
 
 .kanjiDetail {

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useTheme } from "../utils/darkMode";
 
 function KanjiDetails() {
   const { character } = useParams(); // Get the kanji or radical from the URL
   const [kanjiData, setKanjiData] = useState(null); // State to hold kanji data
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
+  const { darkMode } = useTheme();
 
   useEffect(() => {
     const fetchKanjiData = async () => {
@@ -37,7 +39,7 @@ function KanjiDetails() {
   }
 
   return (
-    <div className="result">
+    <div className={darkMode ? "card dark-mode" : "card"}>
       {kanjiData ? (
         <div>
           <div className="kanjiDetail">{kanjiData.kanji.character}</div>

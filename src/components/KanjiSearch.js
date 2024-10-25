@@ -92,8 +92,8 @@ const KanjiSearch = () => {
                   <div
                     className={
                       darkMode
-                        ? "grid-item-clickable dark-mode"
-                        : "grid-item-clickable"
+                        ? "grid-item dark-mode"
+                        : "grid-item"
                     }
                     key={index}
                     onClick={() => (window.location.href = `/kanji/${kanji}`)} // Navigate to details page on click

@@ -71,37 +71,25 @@ const KanjiList = () => {
         </select>
       </div>
       <div className="grid-container">
-        {kanjiResults.map((kanji, index) =>
-          kanji.kanji.character ? (
+        {kanjiResults.map((kanji, index) => (
+          <div
+            className={darkMode ? "grid-item dark-mode" : "grid-item"}
+            key={index}
+            onClick={() => (window.location.href = `/kanji/${kanji.kanji.character}`)}
+          >
+            {kanji.kanji.character}
             <div
-              className={
-                darkMode
-                  ? "grid-item-clickable dark-mode"
-                  : "grid-item-clickable"
-              }
-              key={index}
-              onClick={() =>
-                (window.location.href = `/kanji/${kanji.kanji.character}`)
-              }
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "0.95rem",
+                lineHeight: "0.9rem",
+                marginTop: "0.4rem",
+              }}
             >
-              {kanji.kanji.character}
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "12px",
-                  lineHeight: "0.8rem",
-                  marginTop: "0.5rem",
-                }}
-              >
-                {kanji.kanji.meaning &&
-                typeof kanji.kanji.meaning === "object" &&
-                kanji.kanji.meaning.english
-                  ? kanji.kanji.meaning.english
-                  : "N/A"}
-              </div>
+              {kanji.kanji.meaning || "N/A"}
             </div>
-          ) : null
-        )}
+          </div>
+        ))}
       </div>
     </div>
   );
