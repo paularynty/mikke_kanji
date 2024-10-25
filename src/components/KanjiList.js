@@ -3,7 +3,7 @@ import { useTheme } from "../utils/darkMode";
 
 const KanjiList = () => {
   const [kanjiResults, setKanjiResults] = useState([]);
-  const [sortType, setSortType] = useState("default");  // Start with "default" sort
+  const [sortType, setSortType] = useState("default"); // Start with "default" sort
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { darkMode } = useTheme();
@@ -28,8 +28,8 @@ const KanjiList = () => {
   // Fetch sorted Kanji data when the sortType changes
   useEffect(() => {
     const fetchSortedKanji = async () => {
-      if (sortType === "default") return;  // Don't fetch anything if it's still the default
-      
+      if (sortType === "default") return; // Don't fetch anything if it's still the default
+
       try {
         const response = await fetch(
           `http://localhost:5001/kanji/sorted?sortType=${sortType}`
@@ -41,8 +41,8 @@ const KanjiList = () => {
       }
     };
 
-    fetchSortedKanji();  // Trigger sorting request when sortType changes
-  }, [sortType]);  // Depend on sortType so it re-runs when sorting changes
+    fetchSortedKanji(); // Trigger sorting request when sortType changes
+  }, [sortType]); // Depend on sortType so it re-runs when sorting changes
 
   if (loading) {
     return <div>Loading...</div>;
@@ -85,6 +85,20 @@ const KanjiList = () => {
               }
             >
               {kanji.kanji.character}
+              <div
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "12px",
+                  lineHeight: "0.8rem",
+                  marginTop: "0.5rem",
+                }}
+              >
+                {kanji.kanji.meaning &&
+                typeof kanji.kanji.meaning === "object" &&
+                kanji.kanji.meaning.english
+                  ? kanji.kanji.meaning.english
+                  : "N/A"}
+              </div>
             </div>
           ) : null
         )}

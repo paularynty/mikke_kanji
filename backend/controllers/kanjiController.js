@@ -23,6 +23,7 @@ const fetchKanjiData = async () => {
         meaning: item.kanji.meaning,
         onyomi: item.kanji.onyomi,
         kunyomi: item.kanji.kunyomi,
+        meaning: item.kanji.meaning.english,
       },
     }));
   } catch (error) {
