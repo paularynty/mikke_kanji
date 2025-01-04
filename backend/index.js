@@ -7,7 +7,7 @@ const {
 } = require("./controllers/kanjiProvider");
 
 const app = express();
-const port = 5001;
+const port = 5002;
 
 app.use(cors());
 app.use(express.json());

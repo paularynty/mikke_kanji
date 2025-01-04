@@ -6,8 +6,8 @@ const fetchKanjiData = async () => {
       method: "GET",
       url: "https://kanjialive-api.p.rapidapi.com/api/public/kanji/all/",
       headers: {
-        "x-rapidapi-key": "15ae912ac0mshafc017a046e3bb5p1e71e3jsn9cd9b768b7e9",
-        "x-rapidapi-host": "kanjialive-api.p.rapidapi.com",
+        "x-rapidapi-key": process.env.RAPIDAPI_KEY,
+        "x-rapidapi-host": process.env.RAPIDAPI_HOST,
       }, //DELETE THIS
     };
 
