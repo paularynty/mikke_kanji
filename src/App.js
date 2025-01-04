@@ -1,9 +1,9 @@
 import { Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import { useTheme } from "./utils/darkMode";
 import KanjiDetails from "./components/KanjiDetails";
 import KanjiSearch from "./components/KanjiSearch";
 import KanjiList from "./components/KanjiList";
+import { useTheme } from "./utils/darkMode";
+import Home from "./pages/Home";
 import "./App.css";
 
 function App() {

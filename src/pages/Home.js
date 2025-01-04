@@ -3,14 +3,18 @@ import React from "react";
 function Home() {
   return (
     <div style={{ padding: "20px", textAlign: "center" }}>
-      <h2 style={{ textAlign: "center", marginTop: "40px" }}>Welcome to Mikke!</h2>
+      <h2 style={{ textAlign: "center", marginTop: "40px" }}>
+        Welcome to Mikke!
+      </h2>
       <p style={{ fontSize: "14px", maxWidth: "400px", margin: "0 auto" }}>
-        Mikke (Japanese for <i>"Found it!"</i>) is a quick, low-threshold tool designed for Japanese language learners. It
-        allows you to look up kanji (Japanese characters/ideograms adapted from
-        Chinese characters).
+        Mikke (Japanese for <i>"Found it!"</i>) is a quick, low-threshold tool
+        designed for Japanese language learners. It allows you to look up kanji
+        (Japanese characters/ideograms adapted from Chinese characters).
       </p>
 
-      <h2 style={{ textAlign: "center", marginTop: "30px", padding: "10px" }}>Features</h2>
+      <h2 style={{ textAlign: "center", marginTop: "30px", padding: "10px" }}>
+        Features
+      </h2>
       <div
         style={{
           listStyle: "none",

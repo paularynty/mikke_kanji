@@ -17,8 +17,8 @@ const KanjiSearch = () => {
       return;
     }
 
-    setHasSearched(true); // Set the search flag to true after initiating a search
-    setLoading(true); // Set loading to true before fetching data
+    setHasSearched(true); // After initiating a search, sets search flag to true
+    setLoading(true); // Load state before fetching data
 
     const url = `http://localhost:5001/kanji/search?word=${encodeURIComponent(word)}`;
 
@@ -31,11 +31,11 @@ const KanjiSearch = () => {
 
         resultData.forEach((kanjiData) => {
           if (kanjiData.kanji && kanjiData.kanji.character) {
-            kanjiArray.push(kanjiData.kanji.character); // Add kanji to the array
+            kanjiArray.push(kanjiData.kanji.character);
           }
         });
 
-        setKanjiResults(kanjiArray); // Update the kanji results state
+        setKanjiResults(kanjiArray); // Update kanji results state
       } else {
         setKanjiResults([]); // If no data found, clear results
       }
@@ -57,7 +57,7 @@ const KanjiSearch = () => {
     // Attach keydown event listener
     window.addEventListener("keydown", handleKeyDown);
 
-    // Cleanup the event listener on component unmount
+    // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
@@ -96,7 +96,7 @@ const KanjiSearch = () => {
                         : "grid-item"
                     }
                     key={index}
-                    onClick={() => (window.location.href = `/kanji/${kanji}`)} // Navigate to details page on click
+                    onClick={() => (window.location.href = `/kanji/${kanji}`)}
                   >
                     {kanji}
                   </div>

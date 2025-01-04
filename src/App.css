@@ -1,16 +1,16 @@
-/* Default light mode */
+/* Default light mode
 :root {
   --background-color: white;
   --text-color: #333;
 }
 
 /* Automatically detect dark mode */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background-color: #121212;
     --text-color: white;
   }
-}
+} */
 
 html, body {
   margin: 0;
@@ -93,7 +93,7 @@ html, body {
 }
 
 .footer span {
-  margin: 0 0.5rem; /* Add space on the left and right of each span */
+  margin: 0 0.5rem;
 }
 
 .footer.dark-mode {

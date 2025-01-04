@@ -1,4 +1,3 @@
-const express = require("express");
 const axios = require("axios");
 
 const fetchKanjiData = async () => {
@@ -9,7 +8,7 @@ const fetchKanjiData = async () => {
       headers: {
         "x-rapidapi-key": "15ae912ac0mshafc017a046e3bb5p1e71e3jsn9cd9b768b7e9",
         "x-rapidapi-host": "kanjialive-api.p.rapidapi.com",
-      },
+      }, //DELETE THIS
     };
 
     const response = await axios.request(options);
