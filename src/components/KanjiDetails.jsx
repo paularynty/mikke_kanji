@@ -11,9 +11,7 @@ function KanjiDetails() {
 
   useEffect(() => {
     const fetchKanjiData = async () => {
-      const url = `http://localhost:5001/kanji/details/${encodeURIComponent(
-        character
-      )}`;
+      const url = `/api/kanjiDetails/${encodeURIComponent(character)}`;
 
       try {
         const response = await fetch(url);

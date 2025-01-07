@@ -1,5 +1,4 @@
 import { Routes, Route, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import KanjiDetails from "./components/KanjiDetails";
 import KanjiSearch from "./components/KanjiSearch";
 import KanjiList from "./components/KanjiList";
@@ -9,22 +8,6 @@ import "./App.css";
 
 function App() {
   const { darkMode, toggleDarkMode } = useTheme();
-  const [data, setData] = useState();
-
-  useEffect(() => {
-    fetch("/api/hello")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => setData(data))
-      .catch((err) => {
-        console.error("Error fetching data:", err);
-        setData({ message: "Error fetching data" });
-      });
-  }, []);
 
   return (
     <div className={darkMode ? "App dark-mode" : "App light-mode"}>
@@ -62,7 +45,6 @@ function App() {
           <a href="https://rapidapi.com/KanjiAlive/api/learn-to-read-and-write-japanese-kanji/">
             Kanji database
           </a>
-          <p>{data?.message || "Loading..."}</p>
         </span>
       </footer>
     </div>

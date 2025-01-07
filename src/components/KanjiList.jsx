@@ -12,7 +12,7 @@ const KanjiList = () => {
   useEffect(() => {
     const fetchNonSortedKanji = async () => {
       try {
-        const response = await fetch("http://localhost:5001/kanji");
+        const response = await fetch("/api/kanji");
         const resultData = await response.json();
         setKanjiResults(resultData);
       } catch (error) {
@@ -32,7 +32,7 @@ const KanjiList = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:5001/kanji/sorted?sortType=${sortType}`
+          `/api/kanji/sorted?sortType=${sortType}`
         );
         const resultData = await response.json();
         setKanjiResults(resultData);

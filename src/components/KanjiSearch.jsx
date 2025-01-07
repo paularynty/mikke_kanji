@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useTheme } from "../utils/darkMode";
+import { fetchKanjiSearchResults } from '../services/api';
 
 const KanjiSearch = () => {
-  const [hasSearched, setHasSearched] = useState(false); // State to track if a search has been performed
-  const [kanjiResults, setKanjiResults] = useState([]); // State for kanji results
-  const [searchTerm, setSearchTerm] = useState(""); // State for the search term
+  const [hasSearched, setHasSearched] = useState(false);
+  const [kanjiResults, setKanjiResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { darkMode } = useTheme();
@@ -17,14 +18,15 @@ const KanjiSearch = () => {
       return;
     }
 
+    setError(null);
     setHasSearched(true); // After initiating a search, sets search flag to true
     setLoading(true); // Load state before fetching data
 
-    const url = `http://localhost:5001/kanji/search?word=${encodeURIComponent(word)}`;
+    const url = `/api/kanjiSearch?word=${encodeURIComponent(word)}`;
 
     try {
       const response = await fetch(url);
-      const resultData = await response.json();
+      const resultData = await fetchKanjiSearchResults(word);
 
       if (Array.isArray(resultData) && resultData.length > 0) {
         const kanjiArray = [];

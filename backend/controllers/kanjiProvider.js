@@ -8,7 +8,7 @@ const fetchKanjiData = async () => {
       headers: {
         "x-rapidapi-key": process.env.RAPIDAPI_KEY,
         "x-rapidapi-host": process.env.RAPIDAPI_HOST,
-      }, //DELETE THIS
+      },
     };
 
     const response = await axios.request(options);
@@ -37,8 +37,8 @@ const fetchKanjiDetails = async (character) => {
         character
       )}`,
       headers: {
-        "x-rapidapi-key": "15ae912ac0mshafc017a046e3bb5p1e71e3jsn9cd9b768b7e9",
-        "x-rapidapi-host": "kanjialive-api.p.rapidapi.com",
+        "x-rapidapi-key": process.env.RAPIDAPI_KEY,
+        "x-rapidapi-host":process.env.RAPIDAPI_HOST,
       },
     };
 
@@ -58,8 +58,8 @@ const fetchKanjiSearchResults = async (word) => {
         word
       )}`,
       headers: {
-        "x-rapidapi-key": "15ae912ac0mshafc017a046e3bb5p1e71e3jsn9cd9b768b7e9",
-        "x-rapidapi-host": "kanjialive-api.p.rapidapi.com",
+        "x-rapidapi-key": process.env.RAPIDAPI_KEY,
+        "x-rapidapi-host": process.env.RAPIDAPI_HOST,
       },
     };
 
