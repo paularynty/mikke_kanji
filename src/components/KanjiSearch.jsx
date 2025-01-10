@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useTheme } from "../utils/darkMode";
-import { fetchKanjiSearchResults } from '../services/api';
 
 const KanjiSearch = () => {
   const [hasSearched, setHasSearched] = useState(false);
@@ -13,41 +12,41 @@ const KanjiSearch = () => {
   // Memoized function to handle search logic
   const performSearch = useCallback(async () => {
     const word = searchTerm.trim();
+
     if (!word) {
       alert("Enter a word to search for.");
       return;
     }
 
     setError(null);
-    setHasSearched(true); // After initiating a search, sets search flag to true
-    setLoading(true); // Load state before fetching data
-
-    const url = `/api/kanjiSearch?word=${encodeURIComponent(word)}`;
+    setHasSearched(true);
+    setLoading(true);
 
     try {
-      const response = await fetch(url);
-      const resultData = await fetchKanjiSearchResults(word);
+      // Call the serverless function
+      const response = await fetch(
+        `/api/kanjiSearch?word=${encodeURIComponent(word)}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch Kanji data");
+      }
+      const resultData = await response.json();
 
       if (Array.isArray(resultData) && resultData.length > 0) {
-        const kanjiArray = [];
-
-        resultData.forEach((kanjiData) => {
-          if (kanjiData.kanji && kanjiData.kanji.character) {
-            kanjiArray.push(kanjiData.kanji.character);
-          }
-        });
-
-        setKanjiResults(kanjiArray); // Update kanji results state
+        const kanjiArray = resultData.map(
+          (kanjiData) => kanjiData.kanji.character
+        );
+        setKanjiResults(kanjiArray);
       } else {
-        setKanjiResults([]); // If no data found, clear results
+        setKanjiResults([]); // Clear results if no data is found
       }
     } catch (error) {
+      console.error(error);
       setError("Failed to fetch Kanji data.");
-      setKanjiResults([]); // If an error is encountered, also clear results
     } finally {
       setLoading(false);
     }
-  }, [searchTerm]); // Depend on searchTerm to ensure it uses the latest value
+  }, [searchTerm]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -92,11 +91,7 @@ const KanjiSearch = () => {
               {kanjiResults.length > 0 ? (
                 kanjiResults.map((kanji, index) => (
                   <div
-                    className={
-                      darkMode
-                        ? "grid-item dark-mode"
-                        : "grid-item"
-                    }
+                    className={darkMode ? "grid-item dark-mode" : "grid-item"}
                     key={index}
                     onClick={() => (window.location.href = `/kanji/${kanji}`)}
                   >
